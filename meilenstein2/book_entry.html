@@ -7,7 +7,7 @@
 <body>
 <h1>Bitte geben Sie die Daten zum Buch in dem folgenden Formular ein:</h1>
 
-<form action="http://martinakraus.net/createBookEntry.php">
+<form action="http://martinakraus.net/createBookEntry.php" method="get">
     Vorname: <input type="text" name="vorname"><br>
     Nachname: <input type="text" name="name"><br>
     Titel des Buches: <input type="text" name="titel"><br>
@@ -20,6 +20,14 @@
     Doku: <input type="checkbox" name="genre" value="Doku"><br>
     Komödie: <input type="checkbox" name="genre" value="Komödie"><br>
     Romanze: <input type="checkbox" name="genre" value="Romanze"><br>
+    Art des Buches: <select name="art" size="1">
+    <option value="ebook">eBook</option>
+    <option value="newspaper">Newspaper</option>
+    <option value="taschenbuch">Taschenbuch</option>
+    <option value="lexikon">Lexikon</option>
+    <option value="hardcover" selected>Hardcover</option>
+    <option value="paperback">Paperback</option>
+</select><br>
     <input type="submit" value="Buchdaten absenden">
 
 </form>
