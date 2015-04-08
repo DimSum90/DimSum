@@ -6,11 +6,11 @@
     <link rel="stylesheet" type="text/css" href="mainCSS.css"/>
 </head>
 <body>
-<h1>Bitte geben Sie die Daten zum Buch in dem folgenden Formular ein:</h1>
+<h1 class="ueberschrift">Buch anlegen:</h1>
 
 <form action="http://martinakraus.net/createBookEntry.php" method="get">
-    Vorname: <input type="text" name="vorname"><br>
-    Nachname: <input type="text" name="name"><br>
+    <span class="blaueFormularbeschriftung">Ihr Vorname: </span><input type="text" name="vorname"><br>
+    Ihr Nachname: <input type="text" name="name"><br>
     Titel des Buches: <input type="text" name="titel"><br>
     Buchautor: <input type="text" name="autor"><br>
     ISBN: <input type="number" name="isbn"><br>
@@ -29,7 +29,7 @@
     <option value="hardcover" selected>Hardcover</option>
     <option value="paperback">Paperback</option>
 </select><br>
-    <input type="submit" value="Buchdaten absenden">
+    <input type="submit" value="Absenden">
 
 </form>
 </body>
