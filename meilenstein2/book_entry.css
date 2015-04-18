@@ -1,5 +1,8 @@
 @import url('mainCSS.css');
 
+select {
+	width: 56%
+}
 .bereichLinks {
     position: absolute;
     top: 20%;
