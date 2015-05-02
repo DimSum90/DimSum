@@ -2,11 +2,17 @@
 <html>
 <head lang="de">
     <link rel="stylesheet" type="text/css" href="book_entry.css"/>
+    <script type="text/javascript" src="checkInput.js"></script>
     <meta charset="UTF-8">
     <title>Buch anlegen</title>
+    <script>
+        function checkInput(){
+            return checkBuchstaben(document.getElementById('vorname').value);
+        }
+    </script>
 </head>
 <body>
-<form action="http://martinakraus.net/createBookEntry.php" method="get">
+<form action="http://martinakraus.net/createBookEntry.php" method="get" onsubmit="return checkInput()">
     <div class="bereichOben">Buch anlegen</div>
     <div class="bereichLinks">
         <span class="blaueFormularbeschriftung">Titel des Buches</span><br>
@@ -62,7 +68,7 @@
         <span class="blaueFormularbeschriftung">Favorit</span>
     </div>
     <div class="bereichRechts">
-        <input type="text" name="vorname"><br>
+        <input type="text" name="vorname" id="vorname"><br>
         <br>
         <input type="text" name="name"><br>
         <br>
