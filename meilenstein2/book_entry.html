@@ -18,7 +18,9 @@
 
              return checkJahr(document.getElementById('jahr').value);
              */
-            return checkAuflage(document.getElementById('auflage').value)
+            //return checkAuflage(document.getElementById('auflage').value)
+            //return checkBuchstaben(document.getElementById('vorname').value);
+            return checkISBN(document.getElementById('isbn').value)
         }
     </script>
 </head>
@@ -47,7 +49,7 @@
         <br>
         <input type="text" name="autor"><br>
         <br>
-        <input type="number" name="isbn"><br>
+        <input type="number" name="isbn" id="isbn"><br>
         <br>
         <input type="number" name="kapitel"><br>
         <br>
