@@ -7,21 +7,37 @@
     <title>Buch anlegen</title>
     <script>
         function checkInput() {
-            /*
-             if(checkBuchstaben(document.getElementById('vorname').value) == false){
-             document.getElementById('vorname').focus();
-             document.getElementById('vorname').style.borderColor="red";
-             document.getElementById('vorname').style.borderWidth="5px";
-             document.getElementById('vorname').style.borderStyle="solid";
-             return false;
-             }
+            // Variable gibt an, ob bereits ein Fokus auf ein Formularfeld mit fehlerhafter Eingabe gesetzt wurde.
+            var fokusGesetzt = 0;
 
-             return checkJahr(document.getElementById('jahr').value);
+            // Variable gibt an, ob alle Felder den Anforderungen entsprechen.
+            var alleFelderKorrekt = 1;
+
+            // Prueft, ob die Eingabe der Auflage den Anforderungen entspricht.
+            if (checkAuflage(document.getElementById('auflage').value) == false) {
+                // Falls die Eingabe der Auflage nicht den Anforderungen entspricht, wird der Fokus auf das
+                // entsprechende Formularfeld gesetzt, falls dies zuvor nocht nicht der Fall gewesen ist.
+                if (fokusGesetzt == 0) {
+                    setzeFokusAufFormularfeld('auflage');
+                    // Da ein Fokus gesetzt wurde, wird nun die Variable auf 1 gesetzt.
+                    fokusGesetzt = 1;
+                }
+                // Das Formularfeld muss noch entsprechend als fehlerhaft markiert werden.
+                markiereFormularfeldUngueltig('auflage');
+                // Da das Formularfeld nicht den Anforderungen entspricht, wird die Variable auf 0 gesetzt.
+                fokusGesetzt = 0;
+            }
+
+
+            /*
+             Nachdem alle Felder geprüft wurden, wird je nach dem, ob alle Felder korrekt ausgefuellt waren oder nicht,
+             true oder false zurueckgegeben.
              */
-            //return checkAuflage(document.getElementById('auflage').value)
-            //return checkBuchstaben(document.getElementById('vorname').value);
-            //return checkISBN(document.getElementById('isbn').value);
-            return checkBuchtitel(document.getElementById('titel').value);
+            if (alleFelderKorrekt = 1) {
+                return true;
+            } else {
+                return false;
+            }
         }
     </script>
 </head>

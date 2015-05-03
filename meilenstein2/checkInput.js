@@ -97,3 +97,26 @@ function checkBuchtitel(input) {
     }
     return true;
 }
+
+/**
+ * Funktion, die ein Formularfeld, welches einen ungueltigen Inhalt beinhaltet, entsprechend markiert, damit
+ * es als fehlerhaft erkennbar ist.
+ * @param id Die ID des Formularfeldes, weches markiert werden muss.
+ */
+function markiereFormularfeldUngueltig(id) {
+    // Das Formularfeld mit der ID wird mit einem roten Rahmen versehen.
+    document.getElementById(id).style.borderColor = "red";
+    // Der Rahmen des Formularfeldes mit dieser ID wird auf eine Breite von 5 Pixel gesetzt.
+    //document.getElementById(id).style.borderWidth="5px";
+    // Der Rahmen des Formularfeldes mit dieser ID soll "solid" sein.
+    document.getElementById(id).style.borderStyle = "solid";
+}
+
+/**
+ * Funktion, die den Fokus auf das Formularfeld mit der uebergebenen ID setzt.
+ * @param id Die ID des Formularfeldes, welches den Fokus erhalten soll.
+ */
+function setzeFokusAufFormularfeld(id) {
+    // Der Fokus wird auf das Formularfeld mit der ID gesetzt.
+    document.getElementById(id).focus();
+}
