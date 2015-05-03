@@ -6,14 +6,19 @@
     <meta charset="UTF-8">
     <title>Buch anlegen</title>
     <script>
-        function checkInput(){
-            if(checkBuchstaben(document.getElementById('vorname').value) == false){
-                document.getElementById('vorname').focus();
-                document.getElementById('vorname').style.borderColor="red";
-                document.getElementById('vorname').style.borderWidth="5px";
-                document.getElementById('vorname').style.borderStyle="solid";
-                return false;
-            }
+        function checkInput() {
+            /*
+             if(checkBuchstaben(document.getElementById('vorname').value) == false){
+             document.getElementById('vorname').focus();
+             document.getElementById('vorname').style.borderColor="red";
+             document.getElementById('vorname').style.borderWidth="5px";
+             document.getElementById('vorname').style.borderStyle="solid";
+             return false;
+             }
+
+             return checkJahr(document.getElementById('jahr').value);
+             */
+            return checkAuflage(document.getElementById('auflage').value)
         }
     </script>
 </head>
@@ -46,9 +51,9 @@
         <br>
         <input type="number" name="kapitel"><br>
         <br>
-        <input type="number" name="jahr"><br>
+        <input type="number" name="jahr" id="jahr"><br>
         <br>
-        <input type="number" name="auflage"><br>
+        <input type="number" name="auflage" id="auflage"><br>
         <br>
         <select name="art" size="1">
             <option value="ebook">eBook</option>
