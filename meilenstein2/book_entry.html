@@ -7,12 +7,18 @@
     <title>Buch anlegen</title>
     <script>
         function checkInput(){
-            return checkBuchstaben(document.getElementById('vorname').value);
+            if(checkBuchstaben(document.getElementById('vorname').value) == false){
+                document.getElementById('vorname').focus();
+                document.getElementById('vorname').style.borderColor="red";
+                document.getElementById('vorname').style.borderWidth="5px";
+                document.getElementById('vorname').style.borderStyle="solid";
+                return false;
+            }
         }
     </script>
 </head>
 <body>
-<form action="http://martinakraus.net/createBookEntry.php" method="get" onsubmit="return checkInput()">
+<form name="formular" action="http://martinakraus.net/createBookEntry.php" method="get" onsubmit="return checkInput()">
     <div class="bereichOben">Buch anlegen</div>
     <div class="bereichLinks">
         <span class="blaueFormularbeschriftung">Titel des Buches</span><br>
