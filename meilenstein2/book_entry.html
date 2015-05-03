@@ -20,7 +20,8 @@
              */
             //return checkAuflage(document.getElementById('auflage').value)
             //return checkBuchstaben(document.getElementById('vorname').value);
-            return checkISBN(document.getElementById('isbn').value)
+            //return checkISBN(document.getElementById('isbn').value);
+            return checkBuchtitel(document.getElementById('titel').value);
         }
     </script>
 </head>
@@ -45,7 +46,7 @@
         <span class="blaueFormularbeschriftung">Genre</span>
     </div>
     <div class="bereichLinksMitte">
-        <input type="text" name="titel"><br>
+        <input type="text" name="titel" id="titel"><br>
         <br>
         <input type="text" name="autor"><br>
         <br>
