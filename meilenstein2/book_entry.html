@@ -13,29 +13,24 @@
             // Variable gibt an, ob alle Felder den Anforderungen entsprechen.
             var alleFelderKorrekt = 1;
 
-            // Prueft, ob die Eingabe der Auflage den Anforderungen entspricht.
-            if (checkAuflage(document.getElementById('auflage').value) == false) {
-                // Falls die Eingabe der Auflage nicht den Anforderungen entspricht, wird der Fokus auf das
-                // entsprechende Formularfeld gesetzt, falls dies zuvor nocht nicht der Fall gewesen ist.
-                if (fokusGesetzt == 0) {
-                    setzeFokusAufFormularfeld('auflage');
-                    // Da ein Fokus gesetzt wurde, wird nun die Variable auf 1 gesetzt.
+            if(checkAuflage(document.getElementById("auflage").value)==false){
+                alleFelderKorrekt = 0;
+                markiereFormularfeldUngueltig("auflage");
+                if(fokusGesetzt == 0){
+                    setzeFokusAufFormularfeld("auflage");
                     fokusGesetzt = 1;
                 }
-                // Das Formularfeld muss noch entsprechend als fehlerhaft markiert werden.
-                markiereFormularfeldUngueltig('auflage');
-                // Da das Formularfeld nicht den Anforderungen entspricht, wird die Variable auf 0 gesetzt.
-                alleFelderKorrekt = 0;
             }
-
 
             /*
              Nachdem alle Felder geprüft wurden, wird je nach dem, ob alle Felder korrekt ausgefuellt waren oder nicht,
              true oder false zurueckgegeben.
              */
-            if (alleFelderKorrekt = 1) {
+            if (alleFelderKorrekt == 1) {
                 return true;
             } else {
+                // Meldung an den Anwender, dass nicht alle Felder korrekt ausgefuellt sind.
+                alert('Einige Eingaben sind fehlerhaft. Bitte überprüfen Sie ihre Eingaben');
                 return false;
             }
         }
