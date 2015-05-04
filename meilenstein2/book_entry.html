@@ -13,14 +13,11 @@
             // Variable gibt an, ob alle Felder den Anforderungen entsprechen.
             var alleFelderKorrekt = 1;
 
-            if(checkAuflage(document.getElementById("auflage").value)==false){
+            if (checkFormularfeld("auflage", "checkAuflage", fokusGesetzt) == false) {
+                fokusGesetzt = 1;
                 alleFelderKorrekt = 0;
-                markiereFormularfeldUngueltig("auflage");
-                if(fokusGesetzt == 0){
-                    setzeFokusAufFormularfeld("auflage");
-                    fokusGesetzt = 1;
-                }
             }
+
 
             /*
              Nachdem alle Felder geprüft wurden, wird je nach dem, ob alle Felder korrekt ausgefuellt waren oder nicht,
