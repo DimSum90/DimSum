@@ -4,26 +4,22 @@
  * @returns {boolean} Gibt true zurueck, falls Eingabe den Anforderungen enstpricht oder false, falls dies nicht der Fall ist.
  */
 function checkBuchstaben(input) {
-    if (input == '') {
-        alert('Einige Eingaben sind fehlerhaft. Bitte überprüfen Sie ihre Eingaben');
-        return false;
-    } else {
-        // Eine Zeichenkette mit allen erlaubten Zeichen, in diesem Falle alle großen und kleinen Buchstaben.
-        var korrekteZeichen = 'ABCDEFGHIJKLMNOPQRSTUVWXYZÄÜÖabcdefghijklmnopqrstuvwxyzäüöß';
-        // Variable zur Speicherung des aktuellen Zeichens beim Schleifendurchlauf.
-        var zeichen;
-        for (i = 0; i < input.length; i++) {
-            // Speicherung des aktuellen Zeichens von input
-            zeichen = input.charAt(i);
-            /*
-             Pruefung, ob dieses Zeichen in der Zeichenkette mit den erlaubten Zeichen enthalten ist.
-             Falls nicht, ist indexOf -1.
-             */
-            if (korrekteZeichen.indexOf(zeichen) == -1) {
-                return false;
-            }
+    // Eine Zeichenkette mit allen erlaubten Zeichen, in diesem Falle alle großen und kleinen Buchstaben.
+    var korrekteZeichen = 'ABCDEFGHIJKLMNOPQRSTUVWXYZÄÜÖabcdefghijklmnopqrstuvwxyzäüöß';
+    // Variable zur Speicherung des aktuellen Zeichens beim Schleifendurchlauf.
+    var zeichen;
+    for (i = 0; i < input.length; i++) {
+        // Speicherung des aktuellen Zeichens von input
+        zeichen = input.charAt(i);
+        /*
+         Pruefung, ob dieses Zeichen in der Zeichenkette mit den erlaubten Zeichen enthalten ist.
+         Falls nicht, ist indexOf -1.
+         */
+        if (korrekteZeichen.indexOf(zeichen) == -1) {
+            return false;
         }
     }
+
     return true;
 }
 
@@ -90,7 +86,6 @@ function checkBuchtitel(input) {
          Falls nicht, ist indexOf -1.
          */
         if (korrekteZeichen.indexOf(zeichen) == -1) {
-            alert('Einige Eingaben sind fehlerhaft. Bitte überprüfen Sie ihre Eingaben');
             return false;
         }
     }
@@ -118,26 +113,4 @@ function markiereFormularfeldUngueltig(id) {
 function setzeFokusAufFormularfeld(id) {
     // Der Fokus wird auf das Formularfeld mit der ID gesetzt.
     document.getElementById(id).focus();
-}
-
-/**
- * Funktion, die die jeweilige Funktion zum Pruefen des Formularfeldes mit dem uebergebenen Formularfeldname aufruft und
- * das Ergebnis zurueckgibt.
- * @param formularfeld Name des Formularfeldes, welches geprueft werden soll.
- * @param checkFunktion Name der Funktion, die zur Pruefung des Formularfeldes aufgerufen werden soll.
- * @param fokusGesetzt Gibt an, ob bereits ein Fokus auf ein Formularfeld gesetzt wurde.
- * @returns {boolean} Gibt true zurueck, falls die Eingabe im Formularfeld den Anforderungen entspricht und false, falls
- * dies nicht der Fall ist.
- */
-function checkFormularfeld(formularfeld, checkFunktion, fokusGesetzt) {
-    if (checkFunktion == "checkAuflage") {
-        if (checkAuflage(document.getElementById(formularfeld).value) == false) {
-            markiereFormularfeldUngueltig(formularfeld);
-            if (fokusGesetzt == 0) {
-                setzeFokusAufFormularfeld(formularfeld);
-            }
-            return false;
-        }
-        return true;
-    }
 }

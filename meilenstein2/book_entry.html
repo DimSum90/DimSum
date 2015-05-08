@@ -13,8 +13,66 @@
             // Variable gibt an, ob alle Felder den Anforderungen entsprechen.
             var alleFelderKorrekt = 1;
 
-            if (checkFormularfeld("auflage", "checkAuflage", fokusGesetzt) == false) {
-                fokusGesetzt = 1;
+            if(checkBuchtitel(document.getElementById('titel').value) == false){
+                if(fokusGesetzt == 0){
+                    setzeFokusAufFormularfeld("titel");
+                    fokusGesetzt = 1;
+                }
+                markiereFormularfeldUngueltig("titel");
+                alleFelderKorrekt = 0;
+            }
+
+            if(checkBuchstaben(document.getElementById('autor').value) == false){
+                if(fokusGesetzt == 0){
+                    setzeFokusAufFormularfeld("autor");
+                    fokusGesetzt = 1;
+                }
+                markiereFormularfeldUngueltig("autor");
+                alleFelderKorrekt = 0;
+            }
+
+            if(checkISBN(document.getElementById('isbn').value) == false){
+                if(fokusGesetzt == 0){
+                    setzeFokusAufFormularfeld("isbn");
+                    fokusGesetzt = 1;
+                }
+                markiereFormularfeldUngueltig("isbn");
+                alleFelderKorrekt = 0;
+            }
+
+            if(checkJahr(document.getElementById('jahr').value) == false){
+                if(fokusGesetzt == 0){
+                    setzeFokusAufFormularfeld("jahr");
+                    fokusGesetzt = 1;
+                }
+                markiereFormularfeldUngueltig("jahr");
+                alleFelderKorrekt = 0;
+            }
+
+            if(checkAuflage(document.getElementById('auflage').value) == false){
+                if(fokusGesetzt == 0){
+                    setzeFokusAufFormularfeld("auflage");
+                    fokusGesetzt = 1;
+                }
+                markiereFormularfeldUngueltig("auflage");
+                alleFelderKorrekt = 0;
+            }
+
+            if(checkBuchstaben(document.getElementById('vorname').value) == false){
+                if(fokusGesetzt == 0){
+                    setzeFokusAufFormularfeld("vorname");
+                    fokusGesetzt = 1;
+                }
+                markiereFormularfeldUngueltig("vorname");
+                alleFelderKorrekt = 0;
+            }
+
+            if(checkBuchstaben(document.getElementById('name').value) == false){
+                if(fokusGesetzt == 0){
+                    setzeFokusAufFormularfeld("name");
+                    fokusGesetzt = 1;
+                }
+                markiereFormularfeldUngueltig("name");
                 alleFelderKorrekt = 0;
             }
 
@@ -56,7 +114,7 @@
     <div class="bereichLinksMitte">
         <input type="text" name="titel" id="titel"><br>
         <br>
-        <input type="text" name="autor"><br>
+        <input type="text" name="autor" id="autor"><br>
         <br>
         <input type="number" name="isbn" id="isbn"><br>
         <br>
@@ -92,7 +150,7 @@
     <div class="bereichRechts">
         <input type="text" name="vorname" id="vorname"><br>
         <br>
-        <input type="text" name="name"><br>
+        <input type="text" name="name" id="name"><br>
         <br>
         <input type="checkbox" name="filmfavorit">
     </div>
