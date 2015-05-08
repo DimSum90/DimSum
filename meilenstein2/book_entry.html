@@ -58,25 +58,6 @@
                 alleFelderKorrekt = 0;
             }
 
-            if(checkBuchstaben(document.getElementById('vorname').value) == false){
-                if(fokusGesetzt == 0){
-                    setzeFokusAufFormularfeld("vorname");
-                    fokusGesetzt = 1;
-                }
-                markiereFormularfeldUngueltig("vorname");
-                alleFelderKorrekt = 0;
-            }
-
-            if(checkBuchstaben(document.getElementById('name').value) == false){
-                if(fokusGesetzt == 0){
-                    setzeFokusAufFormularfeld("name");
-                    fokusGesetzt = 1;
-                }
-                markiereFormularfeldUngueltig("name");
-                alleFelderKorrekt = 0;
-            }
-
-
             /*
              Nachdem alle Felder geprüft wurden, wird je nach dem, ob alle Felder korrekt ausgefuellt waren oder nicht,
              true oder false zurueckgegeben.
