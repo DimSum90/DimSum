@@ -1,7 +1,7 @@
-////read JSON data: http://www.w3schools.com/json/json_example.asp 
 
-{
-"horrordata": [
+
+
+{"horrordata":[
 	{
 	"autor": "Stephen King",
 	"titel": "The Stand - Das letzte Gefecht",
@@ -65,5 +65,4 @@
 	"erscheinungsjahr": 2001,
 	"auflage": 11
 	}
-]
-}
+]}
