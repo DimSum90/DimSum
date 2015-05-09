@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <head>
     <link rel="stylesheet" href="book.css" type="text/css">
-    <script type="text/javascript" src="roman.json"></script>
-    <script type="text/javascript" src="horror.json"></script>
-    <script language="javascript" type="text/javascript" src="book.js"></script>
-    <script language="javascript" type="text/javascript"></script>
-
+    <script type="text/javascript" src="roman_books.json"></script>
+    <script type="text/javascript" src="horror_books.json"></script>
+    <meta charset="UTF-8">
+    <title>Meine Bücher</title>
 
     <script>
         var xml = new XMLHttpRequest(); //erstellen und eine neue xml Request
 
         window.onload = function () { //Fenster ladet
-            xml.open("GET", "horror.json", false); //�ffnen der Json Datei
+            xml.open("GET", "horror_books.json", false); //Öffnen der Json Datei
             xml.send(null); //ohne Anhang
 
             var horror = JSON.parse(xml.responseText);
             horror = horror.horrordata;
 
-            xml.open("GET", "roman.json", false); //�ffnen der Json Datei
+            xml.open("GET", "roman_books.json", false); //Öffnen der Json Datei
             xml.send(null); //ohne Anhang
 
             var roman = JSON.parse(xml.responseText);
@@ -95,7 +94,6 @@
 
             }
         }
-        ;
 
 
     </script>
@@ -104,14 +102,14 @@
 </head>
 
 <body>
-<h1 class="center">Meine B�cher</h1>
+<h1 class="center">Meine Bücher</h1>
 <br>
 <br>
-<button onclick="loadHorror()">Horror</button>
-<button onclick="loadRoman()">Roman</button>
+<button class="buttonBuchgenre" onclick="loadHorror()">Horror</button>
+<button class="buttonBuchgenre" onclick="loadRoman()">Roman</button>
 
 
-<table class="center" id="tabelle1" border="1">
+<table class="center" id="tabelle1">
     <tr>
         <th>Autor</th>
         <th>Titel</th>
@@ -125,7 +123,7 @@
 </table>
 
 
-<table id="tabelle2" border="1" class="center">
+<table id="tabelle2" class="center">
     <tr>
         <th>Autor</th>
         <th>Titel</th>
