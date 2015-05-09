@@ -1,25 +1,47 @@
 @import url('main.css');
 
-h1{
-margin-top:5%;
-font-size: 22px;
-text-align: center;
-color: rgb(63,72,204);
+h1 {
+    margin-top: 5%;
+    font-size: 22px;
+    text-align: center;
+    color: #3f48cc;
 }
 
-.center{
-
-margin-left:auto;
-margin-right:auto;
-
+#tabelle1 {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    border: 3px solid;
+    border-color: #3f48cc;
+    border-collapse: separate;
 }
 
-
-#tabelle1{
-position:absolute;
-display:hidden;
+#tabelle2 {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    border: 3px solid;
+    border-color: #3f48cc;
+    border-collapse: separate;
 }
-#tabelle2{
-position:absolute;
-display:hidden;
+
+.buttonsBuchgenre {
+    margin: 0px;
+    width: 40%;
+    text-align: center;
+    font-size: 18px;
+    font-family: sans-serif;
+    border: solid;
+    border-color: #3f48cc;
+    background-color: #00a2e8;
+}
+
+.buttonsBuchgenre > a:hover {
+    background-color: #3f48cc;
+}
+
+.buttonsBuchgenre:hover {
+    background-color: #3f48cc;
 }
