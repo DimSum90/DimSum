@@ -45,6 +45,7 @@
          * Funktion zum Wechseln auf die Tabelle Horror.
          */
         function loadHorror() {
+            // Die jeweilige Tabelle wird ein- bzw. ausgeblendet und die Hintergrundfarbe des Buttons geaendert, so dass sichtbar ist, welcher gedrueckt ist.
             document.getElementById("tabelle1").style.visibility = "hidden";
             document.getElementById("tabelle2").style.visibility = "visible";
             document.getElementById("buttonHorror").style.backgroundColor = "#3f48cc";
@@ -56,6 +57,7 @@
          * Funktion zum Wechseln auf die Tabelle Roman.
          */
         function loadRoman() {
+            // Die jeweilige Tabelle wird ein- bzw. ausgeblendet und die Hintergrundfarbe des Buttons geaendert, so dass sichtbar ist, welcher gedrueckt ist.
             document.getElementById("tabelle2").style.visibility = "hidden";
             document.getElementById("tabelle1").style.visibility = "visible";
             document.getElementById("buttonHorror").style.backgroundColor = "#00a2e8";
@@ -122,6 +124,7 @@
                 auflageElement.appendChild(auflageDaten);
                 document.getElementById("tabellenReihe" + i).appendChild(auflageElement);
 
+                // Die Schriftfarbe wird auf blau gesetzt.
                 document.getElementById("tabellenReihe" + i).style.color = "#3f48cc";
             }
         }
