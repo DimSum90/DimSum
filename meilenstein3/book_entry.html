@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head lang="de">
+    <link rel="stylesheet" type="text/css" href="book_entry.css"/>
+    <script type="text/javascript" src="checkInput.js"></script>
+    <meta charset="UTF-8">
+    <title>Buch anlegen</title>
+    <script>
+        function checkInput() {
+            // Variable gibt an, ob bereits ein Fokus auf ein Formularfeld mit fehlerhafter Eingabe gesetzt wurde.
+            var fokusGesetzt = 0;
+
+            // Variable gibt an, ob alle Felder den Anforderungen entsprechen.
+            var alleFelderKorrekt = 1;
+
+            if(checkBuchtitel(document.getElementById('titel').value) == false){
+                if(fokusGesetzt == 0){
+                    setzeFokusAufFormularfeld("titel");
+                    fokusGesetzt = 1;
+                }
+                markiereFormularfeldUngueltig("titel");
+                alleFelderKorrekt = 0;
+            }
+
+            if(checkBuchstaben(document.getElementById('autor').value) == false){
+                if(fokusGesetzt == 0){
+                    setzeFokusAufFormularfeld("autor");
+                    fokusGesetzt = 1;
+                }
+                markiereFormularfeldUngueltig("autor");
+                alleFelderKorrekt = 0;
+            }
+
+            if(checkISBN(document.getElementById('isbn').value) == false){
+                if(fokusGesetzt == 0){
+                    setzeFokusAufFormularfeld("isbn");
+                    fokusGesetzt = 1;
+                }
+                markiereFormularfeldUngueltig("isbn");
+                alleFelderKorrekt = 0;
+            }
+
+            if(checkJahr(document.getElementById('jahr').value) == false){
+                if(fokusGesetzt == 0){
+                    setzeFokusAufFormularfeld("jahr");
+                    fokusGesetzt = 1;
+                }
+                markiereFormularfeldUngueltig("jahr");
+                alleFelderKorrekt = 0;
+            }
+
+            if(checkAuflage(document.getElementById('auflage').value) == false){
+                if(fokusGesetzt == 0){
+                    setzeFokusAufFormularfeld("auflage");
+                    fokusGesetzt = 1;
+                }
+                markiereFormularfeldUngueltig("auflage");
+                alleFelderKorrekt = 0;
+            }
+
+            if(checkBuchstaben(document.getElementById('vorname').value) == false){
+                if(fokusGesetzt == 0){
+                    setzeFokusAufFormularfeld("vorname");
+                    fokusGesetzt = 1;
+                }
+                markiereFormularfeldUngueltig("vorname");
+                alleFelderKorrekt = 0;
+            }
+
+            if(checkBuchstaben(document.getElementById('name').value) == false){
+                if(fokusGesetzt == 0){
+                    setzeFokusAufFormularfeld("name");
+                    fokusGesetzt = 1;
+                }
+                markiereFormularfeldUngueltig("name");
+                alleFelderKorrekt = 0;
+            }
+
+
+            /*
+             Nachdem alle Felder geprüft wurden, wird je nach dem, ob alle Felder korrekt ausgefuellt waren oder nicht,
+             true oder false zurueckgegeben.
+             */
+            if (alleFelderKorrekt == 1) {
+                return true;
+            } else {
+                // Meldung an den Anwender, dass nicht alle Felder korrekt ausgefuellt sind.
+                alert('Einige Eingaben sind fehlerhaft. Bitte überprüfen Sie ihre Eingaben');
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+<form name="formular" action="http://martinakraus.net/createBookEntry.php" method="get" onsubmit="return checkInput()">
+    <div class="bereichOben">Buch anlegen</div>
+    <div class="bereichLinks">
+        <span class="blaueFormularbeschriftung">Titel des Buches</span><br>
+        <br>
+        <span class="blaueFormularbeschriftung">Buchautor</span><br>
+        <br>
+        <span class="blaueFormularbeschriftung">ISBN</span><br>
+        <br>
+        <span class="blaueFormularbeschriftung">Kapitel</span><br>
+        <br>
+        <span class="blaueFormularbeschriftung">Erscheinungsjahr</span><br>
+        <br>
+        <span class="blaueFormularbeschriftung">Auflage</span><br>
+        <br>
+        <span class="blaueFormularbeschriftung">Art des Buches</span><br>
+        <br>
+        <span class="blaueFormularbeschriftung">Genre</span>
+    </div>
+    <div class="bereichLinksMitte">
+        <input type="text" name="titel" id="titel"><br>
+        <br>
+        <input type="text" name="autor" id="autor"><br>
+        <br>
+        <input type="number" name="isbn" id="isbn"><br>
+        <br>
+        <input type="number" name="kapitel"><br>
+        <br>
+        <input type="number" name="jahr" id="jahr"><br>
+        <br>
+        <input type="number" name="auflage" id="auflage"><br>
+        <br>
+        <select name="art" size="1">
+            <option value="ebook">eBook</option>
+            <option value="newspaper">Newspaper</option>
+            <option value="taschenbuch">Taschenbuch</option>
+            <option value="lexikon">Lexikon</option>
+            <option value="hardcover" selected>Hardcover</option>
+            <option value="paperback">Paperback</option>
+        </select><br>
+        <br>
+        <input type="checkbox" name="genre" value="Horror" checked><span class="checkboxenSchrift">Horror</span>
+        <span class="checkboxenSchriftrechts"><input type="checkbox" name="genre" value="Doku">Doku</span><br>
+        <input type="checkbox" name="genre" value="Psycho"><span class="checkboxenSchrift">Psycho</span>
+        <span class="checkboxenSchriftrechts"><input type="checkbox" name="genre" value="Komoedie">Komödie</span><br>
+        <input type="checkbox" name="genre" value="Krimi"><span class="checkboxenSchrift">Krimi</span>
+        <span class="checkboxenSchriftrechts"><input type="checkbox" name="genre" value="Romanze">Romanze</span><br>
+    </div>
+    <div class="bereichMitteRechts">
+        <span class="blaueFormularbeschriftung">Ihr Vorname</span><br>
+        <br>
+        <span class="blaueFormularbeschriftung">Ihr Nachname</span><br>
+        <br>
+        <span class="blaueFormularbeschriftung">Favorit</span>
+    </div>
+    <div class="bereichRechts">
+        <input type="text" name="vorname" id="vorname"><br>
+        <br>
+        <input type="text" name="name" id="name"><br>
+        <br>
+        <input type="checkbox" name="filmfavorit">
+    </div>
+    <div class="bereichUnten">
+        <button type="submit" class="buttonFormularAbsenden">Absenden</button>
+    </div>
+</form>
+</body>
+</html>
