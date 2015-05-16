@@ -1,5 +1,16 @@
 @import url('mainCSS.css');
 
+
+
+.richtigerInput{
+border:none;
+border-color:none;
+}
+
+.falscherInput{
+border:3px solid;
+border-color:red;
+}
 select {
 	width: 56%;
 }
