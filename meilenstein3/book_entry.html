@@ -2,94 +2,87 @@
 <html>
 <head lang="de">
     <link rel="stylesheet" type="text/css" href="book_entry.css"/>
-    <script type="text/javascript" src="checkInput.js"></script>
-    <meta charset="UTF-8">
-    <title>Buch anlegen</title>
-    <script>
-        function checkInput() {
-            // Variable gibt an, ob bereits ein Fokus auf ein Formularfeld mit fehlerhafter Eingabe gesetzt wurde.
-            var fokusGesetzt = 0;
+  <meta charset="UTF-8">
+  <title>book_entry</title>
+<script>
+function checkInput() {
+    var global = true;
+    
+    var arrayinput = document.getElementsByTagName("input");
 
-            // Variable gibt an, ob alle Felder den Anforderungen entsprechen.
-            var alleFelderKorrekt = 1;
+    //Mit der For-Schleife alle Inputfelder überprüfen und durchgehen
+    for (var i = 0; i < arrayinput.length; i++) {
+        var local = true;
+        //Alle Inputfelder die leer sind werden als Falscheingabe betrachtet
+			  if (arrayinput[i] == "undefined" && arrayinput[i].className == 'falscherInput' ) {
+				local = false;
+        } else {
+				switch (arrayinput[i].id) {
+					case 'vorname':
+						if (!arrayinput[i].value.match('^[A-Z|a-z]+')) {
+							local = false;
+						}
+						break;
+					case 'name':
+						if (!arrayinput[i].value.match('^[A-Z|a-z]+')) {
+							local = false;
+						}
+						break;
+					case 'titel':
+						if (!arrayinput[i].value.match('.+')) {
+							local = false;
+						}
+						break;
+					case 'autor':
+						if (!arrayinput[i].value.match('^[A-Z|a-z|\s]+')) {
+							local = false;
+						}
+						break;
+					case 'jahr':
+						if (!(arrayinput[i].value.match('^[0-9]{3,4}'))) {
+							local = false;
+						} else {
+							if(arrayinput[i].value > 2015) {
+								local = false;
+							}
+						}
+						break;
+					case 'isbn':		
+						if (!(arrayinput[i].value.match('^[0-9]{1,13}$'))) {
+								local = false;
+						}
+						break;
+					case 'auflage':
+						if (!arrayinput[i].value.match('^[0-9][0-9]|[0-9]')) {
+							local = false;
+						}
+						break;
+				}
+				
+			}	
+            if (!local) {
+                //Alle Inputfelder in denen falsche Eingaben enthalten sind wird die css-klasse ersetzt mit einer anderen
+                arrayinput[i].className = 'falscherInput';
 
-            if(checkBuchtitel(document.getElementById('titel').value) == false){
-                if(fokusGesetzt == 0){
-                    setzeFokusAufFormularfeld("titel");
-                    fokusGesetzt = 1;
+                if (global) {
+                    //Der Coursor fokusiert den ersten Inputfeld an in der Liste
+                    arrayinput[i].focus();
+                    global = local;
+					alert("Einige Eingaben sind fehlerhaft. Bitte überprüfen Sie ihre Eingaben");
                 }
-                markiereFormularfeldUngueltig("titel");
-                alleFelderKorrekt = 0;
-            }
 
-            if(checkBuchstaben(document.getElementById('autor').value) == false){
-                if(fokusGesetzt == 0){
-                    setzeFokusAufFormularfeld("autor");
-                    fokusGesetzt = 1;
-                }
-                markiereFormularfeldUngueltig("autor");
-                alleFelderKorrekt = 0;
-            }
-
-            if(checkISBN(document.getElementById('isbn').value) == false){
-                if(fokusGesetzt == 0){
-                    setzeFokusAufFormularfeld("isbn");
-                    fokusGesetzt = 1;
-                }
-                markiereFormularfeldUngueltig("isbn");
-                alleFelderKorrekt = 0;
-            }
-
-            if(checkJahr(document.getElementById('jahr').value) == false){
-                if(fokusGesetzt == 0){
-                    setzeFokusAufFormularfeld("jahr");
-                    fokusGesetzt = 1;
-                }
-                markiereFormularfeldUngueltig("jahr");
-                alleFelderKorrekt = 0;
-            }
-
-            if(checkAuflage(document.getElementById('auflage').value) == false){
-                if(fokusGesetzt == 0){
-                    setzeFokusAufFormularfeld("auflage");
-                    fokusGesetzt = 1;
-                }
-                markiereFormularfeldUngueltig("auflage");
-                alleFelderKorrekt = 0;
-            }
-
-            if(checkBuchstaben(document.getElementById('vorname').value) == false){
-                if(fokusGesetzt == 0){
-                    setzeFokusAufFormularfeld("vorname");
-                    fokusGesetzt = 1;
-                }
-                markiereFormularfeldUngueltig("vorname");
-                alleFelderKorrekt = 0;
-            }
-
-            if(checkBuchstaben(document.getElementById('name').value) == false){
-                if(fokusGesetzt == 0){
-                    setzeFokusAufFormularfeld("name");
-                    fokusGesetzt = 1;
-                }
-                markiereFormularfeldUngueltig("name");
-                alleFelderKorrekt = 0;
-            }
-
-
-            /*
-             Nachdem alle Felder geprüft wurden, wird je nach dem, ob alle Felder korrekt ausgefuellt waren oder nicht,
-             true oder false zurueckgegeben.
-             */
-            if (alleFelderKorrekt == 1) {
-                return true;
             } else {
-                // Meldung an den Anwender, dass nicht alle Felder korrekt ausgefuellt sind.
-                alert('Einige Eingaben sind fehlerhaft. Bitte überprüfen Sie ihre Eingaben');
-                return false;
+                //Wenn  alle Eingaben korrekt sind, wird vom jeweiligen Inputfeld die css-Klasse zurückgesetzt
+                arrayinput[i].className = "richtigerInput";
+				
             }
-        }
-    </script>
+        
+    }
+
+    return global;
+}
+ 
+ </script>
 </head>
 <body>
 <form name="formular" action="http://martinakraus.net/createBookEntry.php" method="get" onsubmit="return checkInput()">
@@ -112,17 +105,17 @@
         <span class="blaueFormularbeschriftung">Genre</span>
     </div>
     <div class="bereichLinksMitte">
-        <input type="text" name="titel" id="titel"><br>
+        <input type="text" name="titel" id="titel" ><br>
         <br>
-        <input type="text" name="autor" id="autor"><br>
+        <input type="text" name="autor" id="autor" ><br>
         <br>
         <input type="number" name="isbn" id="isbn"><br>
         <br>
-        <input type="number" name="kapitel"><br>
+        <input type="number" name="kapitel" id="kapitel"><br>
         <br>
-        <input type="number" name="jahr" id="jahr"><br>
+        <input type="number" name="jahr" id="jahr" ><br>
         <br>
-        <input type="number" name="auflage" id="auflage"><br>
+        <input type="number" name="auflage" id="auflage" ><br>
         <br>
         <select name="art" size="1">
             <option value="ebook">eBook</option>
@@ -140,6 +133,7 @@
         <input type="checkbox" name="genre" value="Krimi"><span class="checkboxenSchrift">Krimi</span>
         <span class="checkboxenSchriftrechts"><input type="checkbox" name="genre" value="Romanze">Romanze</span><br>
     </div>
+	
     <div class="bereichMitteRechts">
         <span class="blaueFormularbeschriftung">Ihr Vorname</span><br>
         <br>
@@ -148,9 +142,9 @@
         <span class="blaueFormularbeschriftung">Favorit</span>
     </div>
     <div class="bereichRechts">
-        <input type="text" name="vorname" id="vorname"><br>
+        <input type="text" name="vorname" id="vorname" ><br>
         <br>
-        <input type="text" name="name" id="name"><br>
+        <input type="text" name="name" id="name" ><br>
         <br>
         <input type="checkbox" name="filmfavorit">
     </div>
