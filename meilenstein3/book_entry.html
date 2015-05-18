@@ -14,7 +14,7 @@ function checkInput() {
     for (var i = 0; i < arrayinput.length; i++) {
         var local = true;
         //Alle Inputfelder die leer sind werden als Falscheingabe betrachtet
-			  if (arrayinput[i] == "undefined" && arrayinput[i].className == 'falscherInput' ) {
+			  if (arrayinput[i] == "undefined" ) {
 				local = false;
         } else {
 				switch (arrayinput[i].id) {
