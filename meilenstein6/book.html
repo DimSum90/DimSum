@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="book.css" type="text/css">
+    <script type="text/javascript" src="roman_books.json"></script>
+    <script type="text/javascript" src="horror_books.json"></script>
+    <meta charset="UTF-8">
+    <title>Meine Bücher</title>
+
+    <script>
+        // Variable zum Laden der JSON-Dateien über HTTP.
+        var xml = new XMLHttpRequest();
+
+        // Beim Seitenaufruf wird die Funktion ausgefuehrt.
+        window.onload = function () {
+            // horror_books.json-Datei wird mit "GET" geladen.
+            xml.open("GET", "horror_books.json", false);
+            // Daten werden uebertragen.
+            xml.send();
+
+            // Die Daten der JSON-Datei werden ausgelesen und die Daten von horrordata aus dieser JSON-Datei in der Variable horror gespeichert.
+            var horror = JSON.parse(xml.responseText);
+            horror = horror.horrordata;
+
+            // roman_books.json-Datei wird mit "GET" geladen.
+            xml.open("GET", "roman_books.json", false);
+            // Daten werden uebertragen.
+            xml.send();
+
+            // Die Daten der JSON-Datei werden ausgelesen und die Daten von romandata aus dieser JSON-Datei in der Variable roman gespeichert.
+            var roman = JSON.parse(xml.responseText);
+            roman = roman.romandata;
+
+            // Die Variablen mit den Daten, die in die Tabellen sollen, werden an die Funktion zur Tabellenerzeugung uebergeben.
+            tabellenErzeugung(horror, "horror");
+            tabellenErzeugung(roman, "roman");
+
+            // Zu Beginn soll nur eine Tabelle sichtbar sein.
+            document.getElementById("tabelle1").style.visibility = "hidden";
+
+            document.getElementById("buttonHorror").style.backgroundColor = "#3f48cc";
+
+        }
+
+        /**
+         * Funktion zum Wechseln auf die Tabelle Horror.
+         */
+        function loadHorror() {
+            // Die jeweilige Tabelle wird ein- bzw. ausgeblendet und die Hintergrundfarbe des Buttons geaendert, so dass sichtbar ist, welcher gedrueckt ist.
+            document.getElementById("tabelle1").style.visibility = "hidden";
+            document.getElementById("tabelle2").style.visibility = "visible";
+            document.getElementById("buttonHorror").style.backgroundColor = "#3f48cc";
+            document.getElementById("buttonRoman").style.backgroundColor = "#00a2e8";
+
+        }
+
+        /**
+         * Funktion zum Wechseln auf die Tabelle Roman.
+         */
+        function loadRoman() {
+            // Die jeweilige Tabelle wird ein- bzw. ausgeblendet und die Hintergrundfarbe des Buttons geaendert, so dass sichtbar ist, welcher gedrueckt ist.
+            document.getElementById("tabelle2").style.visibility = "hidden";
+            document.getElementById("tabelle1").style.visibility = "visible";
+            document.getElementById("buttonHorror").style.backgroundColor = "#00a2e8";
+            document.getElementById("buttonRoman").style.backgroundColor = "#3f48cc";
+        }
+
+        /**
+         * Funktion zur Erzeugung der Tabellen
+         * @param daten Variable mit den Datenobjekten, die in die Tabelle eingetragen werden sollen.
+         * @param string Das Buchgenre, damit klar ist, in welche Tabelle diese Daten sollen.
+         */
+        function tabellenErzeugung(daten, buchgenre) {
+            // Solange noch Datenobjekte in der Variable daten vorhanden sind, sollen die Daten in die Tabelle eingetragen werden.
+            for (var i = 0; i < daten.length; i++) {
+                // Erzeugung eines jeweiligen Elementes für die Tabellenreihe.
+                var zeile = document.createElement("TR");
+
+                // Die Variable erhaelt als ID die Bezeichnung "tabellenReihe" mit der Nummer des Datenobjektes aus der Variable des Schleifendurchlaufes.
+                zeile.setAttribute("id", "tabellenReihe" + i);
+
+                // Zur uebergebenen Variable wird die jeweilige Tabelle gewaehlt.
+                if (buchgenre == "roman") {
+                    document.getElementById("tabelle1").appendChild(zeile);
+                } else if (buchgenre == "horror") {
+                    document.getElementById("tabelle2").appendChild(zeile);
+                }
+
+                // Ein neues Element mit Tabellendaten wird erstellt.
+                var autorElement = document.createElement("TD");
+                // Der Inhalt des aktuellen Datenobjektes in der Variable daten bei dem Autor wird in der Variable gespeichert.
+                var autorDaten = document.createTextNode(daten[i].autor);
+                // Daten werden an das Element angefuegt.
+                autorElement.appendChild(autorDaten);
+                // Das Element wird an die Tabellenreihe angefuegt.
+                document.getElementById("tabellenReihe" + i).appendChild(autorElement);
+
+                var buchtitelElement = document.createElement("TD");
+                var buchtitelDaten = document.createTextNode(daten[i].titel);
+                buchtitelElement.appendChild(buchtitelDaten);
+                document.getElementById("tabellenReihe" + i).appendChild(buchtitelElement);
+
+                var kapitelElement = document.createElement("TD");
+                var kapitelDaten = document.createTextNode(daten[i].kapitel);
+                kapitelElement.appendChild(kapitelDaten);
+                document.getElementById("tabellenReihe" + i).appendChild(kapitelElement);
+
+                var buchartElement = document.createElement("TD");
+                var buchartDaten = document.createTextNode(daten[i].buchart);
+                buchartElement.appendChild(buchartDaten);
+                document.getElementById("tabellenReihe" + i).appendChild(buchartElement);
+
+                var ISBNElement = document.createElement("TD");
+                var ISBNDaten = document.createTextNode(daten[i].ISBN);
+                ISBNElement.appendChild(ISBNDaten);
+                document.getElementById("tabellenReihe" + i).appendChild(ISBNElement);
+
+                var erscheinungsJahrElement = document.createElement("TD");
+                var erscheinungsJahrDaten = document.createTextNode(daten[i].erscheinungsjahr);
+                erscheinungsJahrElement.appendChild(erscheinungsJahrDaten);
+                document.getElementById("tabellenReihe" + i).appendChild(erscheinungsJahrElement);
+
+                var auflageElement = document.createElement("TD");
+                var auflageDaten = document.createTextNode(daten[i].auflage);
+                auflageElement.appendChild(auflageDaten);
+                document.getElementById("tabellenReihe" + i).appendChild(auflageElement);
+
+                // Die Schriftfarbe wird auf blau gesetzt.
+                document.getElementById("tabellenReihe" + i).style.color = "#3f48cc";
+            }
+        }
+
+
+    </script>
+
+    <title>book</title>
+</head>
+
+<body>
+<h1 class="center">Meine Bücher</h1>
+<br>
+
+<div class="center">
+    <button class="buttonsBuchgenre" onclick="loadHorror()" id="buttonHorror">Horror</button>
+    <button class="buttonsBuchgenre" onclick="loadRoman()" id="buttonRoman">Roman</button>
+    <br>
+    <br>
+</div>
+
+<div class="center">
+    <table id="tabelle1" class="center" border="1">
+        <tr>
+            <th>Autor</th>
+            <th>Titel</th>
+            <th>Kapitel</th>
+            <th>Art des Buches</th>
+            <th>ISBN</th>
+            <th>Erscheinungsjahr</th>
+            <th>Auflage</th>
+        </tr>
+
+    </table>
+</div>
+
+<table id="tabelle2" class="center" border="1">
+    <tr>
+        <th>Autor</th>
+        <th>Titel</th>
+        <th>Kapitel</th>
+        <th>Art des Buches</th>
+        <th>ISBN</th>
+        <th>Erscheinungsjahr</th>
+        <th>Auflage</th>
+    </tr>
+
+</table>
+
+</body>
+
+
+</html>

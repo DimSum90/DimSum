@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head lang="de">
+    <link rel="stylesheet" type="text/css" href="book_entry.css"/>
+  <meta charset="UTF-8">
+  <title>book_entry</title>
+<script>
+function checkInput() {
+    var global = true;
+    
+    var arrayinput = document.getElementsByTagName("input");
+
+    //Mit der For-Schleife alle Inputfelder überprüfen und durchgehen
+    for (var i = 0; i < arrayinput.length; i++) {
+        var local = true;
+        //Alle Inputfelder die leer sind werden als Falscheingabe betrachtet
+			  if (arrayinput[i] == "undefined" ) {
+				local = false;
+        } else {
+				switch (arrayinput[i].id) {
+					case 'vorname':
+						if (!arrayinput[i].value.match('^[A-Z|a-z]+')) {
+							local = false;
+						}
+						break;
+					case 'name':
+						if (!arrayinput[i].value.match('^[A-Z|a-z]+')) {
+							local = false;
+						}
+						break;
+					case 'titel':
+						if (!arrayinput[i].value.match('.+')) {
+							local = false;
+						}
+						break;
+					case 'autor':
+						if (!arrayinput[i].value.match('^[A-Z|a-z|\s]+')) {
+							local = false;
+						}
+						break;
+					case 'jahr':
+						if (!(arrayinput[i].value.match('^[0-9]{3,4}'))) {
+							local = false;
+						} else {
+							if(arrayinput[i].value > 2015) {
+								local = false;
+							}
+						}
+						break;
+					case 'isbn':		
+						if (!(arrayinput[i].value.match('^[0-9]{1,13}$'))) {
+								local = false;
+						}
+						break;
+					case 'auflage':
+						if (!arrayinput[i].value.match('^[0-9][0-9]|[0-9]')) {
+							local = false;
+						}
+						break;
+				}
+				
+			}	
+            if (!local) {
+                //Alle Inputfelder in denen falsche Eingaben enthalten sind wird die css-klasse ersetzt mit einer anderen
+                arrayinput[i].className = 'falscherInput';
+
+                if (global) {
+                    //Der Coursor fokusiert den ersten Inputfeld an in der Liste
+                    arrayinput[i].focus();
+                    global = local;
+					alert("Einige Eingaben sind fehlerhaft. Bitte überprüfen Sie ihre Eingaben");
+                }
+
+            } else {
+                //Wenn  alle Eingaben korrekt sind, wird vom jeweiligen Inputfeld die css-Klasse zurückgesetzt
+                arrayinput[i].className = "richtigerInput";
+				
+            }
+        
+    }
+
+    return global;
+}
+ 
+ </script>
+</head>
+<body>
+<form name="formular" action="buchanlegen.php" method="get" onsubmit="return checkInput()">
+    <div class="bereichOben">Buch anlegen</div>
+    <div class="bereichLinks">
+        <span class="blaueFormularbeschriftung">Titel des Buches</span><br>
+        <br>
+        <span class="blaueFormularbeschriftung">Buchautor</span><br>
+        <br>
+        <span class="blaueFormularbeschriftung">ISBN</span><br>
+        <br>
+        <span class="blaueFormularbeschriftung">Kapitel</span><br>
+        <br>
+        <span class="blaueFormularbeschriftung">Erscheinungsjahr</span><br>
+        <br>
+        <span class="blaueFormularbeschriftung">Auflage</span><br>
+        <br>
+        <span class="blaueFormularbeschriftung">Art des Buches</span><br>
+        <br>
+        <span class="blaueFormularbeschriftung">Genre</span>
+    </div>
+    <div class="bereichLinksMitte">
+        <input type="text" name="titel" id="titel" ><br>
+        <br>
+        <input type="text" name="autor" id="autor" ><br>
+        <br>
+        <input type="number" name="isbn" id="isbn"><br>
+        <br>
+        <input type="number" name="kapitel" id="kapitel"><br>
+        <br>
+        <input type="number" name="jahr" id="jahr" ><br>
+        <br>
+        <input type="number" name="auflage" id="auflage" ><br>
+        <br>
+        <select name="art" size="1">
+            <option value="eBook">eBook</option>
+            <option value="Newspaper">Newspaper</option>
+            <option value="Taschenbuch">Taschenbuch</option>
+            <option value="Lexikon">Lexikon</option>
+            <option value="Hardcover" selected>Hardcover</option>
+            <option value="Paperback">Paperback</option>
+        </select><br>
+        <br>
+        <input type="checkbox" name="genre" value="Horror" checked><span class="checkboxenSchrift">Horror</span>
+        <span class="checkboxenSchriftrechts"><input type="checkbox" name="genre" value="Doku">Doku</span><br>
+        <input type="checkbox" name="genre" value="Psycho"><span class="checkboxenSchrift">Psycho</span>
+        <span class="checkboxenSchriftrechts"><input type="checkbox" name="genre" value="Komoedie">Komödie</span><br>
+        <input type="checkbox" name="genre" value="Krimi"><span class="checkboxenSchrift">Krimi</span>
+        <span class="checkboxenSchriftrechts"><input type="checkbox" name="genre" value="Romanze">Romanze</span><br>
+    </div>
+	
+    <div class="bereichMitteRechts">
+        <span class="blaueFormularbeschriftung">Ihr Vorname</span><br>
+        <br>
+        <span class="blaueFormularbeschriftung">Ihr Nachname</span><br>
+        <br>
+        <span class="blaueFormularbeschriftung">Favorit</span>
+    </div>
+    <div class="bereichRechts">
+        <input type="text" name="vorname" id="vorname" ><br>
+        <br>
+        <input type="text" name="name" id="name" ><br>
+        <br>
+        <input type="checkbox" name="filmfavorit">
+    </div>
+    <div class="bereichUnten">
+        <button type="submit" class="buttonFormularAbsenden">Absenden</button>
+    </div>
+</form>
+</body>
+</html>
