@@ -13,7 +13,25 @@ $vorname = $_GET["vorname"];
 $nachname = $_GET["name"];
 $favorit;
 
-if($_GET["filmfavorit"] == "on"){
+
+// Hier nun Validierung der Daten des Anwenders!
+$aktuellesJahr = date("Y");
+if($jahr < -1 || $jahr > $aktuellesJahr){
+    $jahr = null;
+    echo $jahr;
+}
+
+
+
+
+
+
+// Ende der Validierung
+
+
+
+
+if(isset($_GET["filmfavorit"])){
     $favorit = 1;
 }else{
     $favorit = 0;
@@ -41,5 +59,4 @@ if(mysql_num_rows($abfrageBenutzer) == 0){
 }else{
     $benutzer = mysql_fetch_object($abfrageBenutzer);
     $benutzerID = $benutzer->benutzerID;
-    echo $benutzerID;
 }
