@@ -13,27 +13,39 @@ $vorname = $_GET["vorname"];
 $nachname = $_GET["name"];
 $favorit;
 
+// Validierung der entsprechenden Eingaben vom Anwender. Unerlaubte Eingaben werden auf null gesetzt und dann in der DB mit Default-Werten versehen.
 
-// Hier nun Validierung der Daten des Anwenders!
+// Das Jahr darf nicht negativ oder groesser, als das aktuelle Jahr sein.
 $aktuellesJahr = date("Y");
-if($jahr < -1 || $jahr > $aktuellesJahr){
+if ($jahr < 0 || $jahr > $aktuellesJahr) {
     $jahr = null;
-    echo $jahr;
+}
+// Der Vorname darf nur Buchstaben enthalten.
+if (!preg_match("/^[A-Z][a-z]+$/", $vorname)) {
+    $vorname = "";
+}
+// Der Nachname darf nur Buchstaben enthalten.
+if (!preg_match("^[A-Z][a-z]+$^", $nachname)) {
+    $nachname = "";
+}
+// Die ISBN-Nummer darf nur Zahlen beinhalten und muss 1 bis 13 Stellen haben.
+if (!preg_match("/^[0-9]{1,13}$/", $isbn)) {
+    $isbn = null;
+}
+// Die Auflage darf nur aus Zahlen bestehen und 1 bis 3 Stellen haben.
+if (!preg_match("/^[0-9]{1,3}$/", $auflage)) {
+    $auflage = null;
 }
 
+// Der Autor darf nur Buchstaben enthalten.
+if (!preg_match("^[A-Z][a-z]+$^", $autor)) {
+    $autor = "";
+}
 
-
-
-
-
-// Ende der Validierung
-
-
-
-
-if(isset($_GET["filmfavorit"])){
+// Sofern die Checkbox für den Favorit gesetzt wurde, wird die entsprechende Variable auf 0 bzw. 1 gesetzt.
+if (isset($_GET["filmfavorit"])) {
     $favorit = 1;
-}else{
+} else {
     $favorit = 0;
 }
 
@@ -49,14 +61,24 @@ $insertBuch = "INSERT INTO buch (titel, autor, isbn, kapitel, jahr, auflage, art
 // Das Buch wird eingetragen.
 $eintragung = mysql_query($insertBuch);
 
-$selectBenutzer = "SELECT benutzerID FROM benutzer WHERE vorname = '".$vorname."' AND nachname = '". $nachname."';";
+$selectBenutzer = "SELECT benutzerID FROM benutzer WHERE vorname = '" . $vorname . "' AND nachname = '" . $nachname . "';";
 $abfrageBenutzer = mysql_query($selectBenutzer);
 
-if(mysql_num_rows($abfrageBenutzer) == 0){
+if (mysql_num_rows($abfrageBenutzer) == 0) {
     $insertBenutzer = "INSERT INTO benutzer (vorname, nachname) VALUES ('$vorname','$nachname');";
     $eintragungBenutzer = mysql_query($insertBenutzer);
-
-}else{
+    $abfrageBenutzer = mysql_query($selectBenutzer);
+    $benutzer = mysql_fetch_object($abfrageBenutzer);
+    $benutzerID = $benutzer->benutzerID;
+} else {
     $benutzer = mysql_fetch_object($abfrageBenutzer);
     $benutzerID = $benutzer->benutzerID;
 }
+
+$abfrageBuchID = "SELECT buchID from buch order by buchID desc limit 1;";
+$ergebnisBuchID = mysql_query($abfrageBuchID);
+$buch = mysql_fetch_object($ergebnisBuchID);
+$buchID = $buch->buchID;
+
+$insertBenutzerBuch = "INSERT INTO benutzerbuecher (benutzerID, buchID, favorit) VALUES ('$benutzerID','$buchID',$favorit)";
+$ergebnisBenutzerBuch = mysql_query($insertBenutzerBuch);
