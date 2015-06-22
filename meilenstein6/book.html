@@ -7,45 +7,49 @@
     <title>Meine Bücher</title>
 
     <script>
-        // Variable zum Laden der JSON-Dateien über HTTP.
-        var xml = new XMLHttpRequest();
+        var romanLoaded = false;
 
         // Beim Seitenaufruf wird die Funktion ausgefuehrt.
-        window.onload = function () {
-            // horror_books.json-Datei wird mit "GET" geladen.
-            xml.open("GET", "horror_books.json", false);
-            // Daten werden uebertragen.
-            xml.send();
-
-            // Die Daten der JSON-Datei werden ausgelesen und die Daten von horrordata aus dieser JSON-Datei in der Variable horror gespeichert.
-            var horror = JSON.parse(xml.responseText);
-            horror = horror.horrordata;
-
-            // roman_books.json-Datei wird mit "GET" geladen.
-            xml.open("GET", "roman_books.json", false);
-            // Daten werden uebertragen.
-            xml.send();
-
-            // Die Daten der JSON-Datei werden ausgelesen und die Daten von romandata aus dieser JSON-Datei in der Variable roman gespeichert.
-            var roman = JSON.parse(xml.responseText);
-            roman = roman.romandata;
-
-            // Die Variablen mit den Daten, die in die Tabellen sollen, werden an die Funktion zur Tabellenerzeugung uebergeben.
-            tabellenErzeugung(horror, "horror");
-            tabellenErzeugung(roman, "roman");
-
-            // Zu Beginn soll nur eine Tabelle sichtbar sein.
+        window.onload = function method() {
+            loaddata('horror_');
             document.getElementById("tabelle1").style.visibility = "hidden";
-
             document.getElementById("buttonHorror").style.backgroundColor = "#3f48cc";
 
         }
 
+        function loaddata(genre) {
+            var xml = new XMLHttpRequest();
+            // horror_books.json-Datei wird mit "GET" geladen.            
+
+            xml.open("GET", "getBooks.php?file=" + genre, true);
+            // Daten werden uebertragen.
+
+
+            xml.onreadystatechange = function () {
+
+                if ((xml.readyState == 4) && (xml.status == 200) && (xml.responseText != null)) {
+                    var buchgenre = JSON.parse(xml.responseText);
+                    if ("horror_" == genre) {
+                        var buch = buchgenre.horrordata;
+                    }
+                    if ("roman_" == genre) {
+                        var buch = buchgenre.romandata;
+                    }
+                    tabellenErzeugung(buch, genre);
+
+                }
+            }
+
+            xml.send();
+
+        }
         /**
          * Funktion zum Wechseln auf die Tabelle Horror.
          */
         function loadHorror() {
             // Die jeweilige Tabelle wird ein- bzw. ausgeblendet und die Hintergrundfarbe des Buttons geaendert, so dass sichtbar ist, welcher gedrueckt ist.
+
+
             document.getElementById("tabelle1").style.visibility = "hidden";
             document.getElementById("tabelle2").style.visibility = "visible";
             document.getElementById("buttonHorror").style.backgroundColor = "#3f48cc";
@@ -58,6 +62,12 @@
          */
         function loadRoman() {
             // Die jeweilige Tabelle wird ein- bzw. ausgeblendet und die Hintergrundfarbe des Buttons geaendert, so dass sichtbar ist, welcher gedrueckt ist.
+
+            if (romanLoaded == false) {
+                loaddata('roman_');
+                romanLoaded = true;
+            }
+
             document.getElementById("tabelle2").style.visibility = "hidden";
             document.getElementById("tabelle1").style.visibility = "visible";
             document.getElementById("buttonHorror").style.backgroundColor = "#00a2e8";
@@ -79,9 +89,9 @@
                 zeile.setAttribute("id", "tabellenReihe" + i);
 
                 // Zur uebergebenen Variable wird die jeweilige Tabelle gewaehlt.
-                if (buchgenre == "roman") {
+                if (buchgenre == "roman_") {
                     document.getElementById("tabelle1").appendChild(zeile);
-                } else if (buchgenre == "horror") {
+                } else if (buchgenre == "horror_") {
                     document.getElementById("tabelle2").appendChild(zeile);
                 }
 
@@ -128,7 +138,6 @@
                 document.getElementById("tabellenReihe" + i).style.color = "#3f48cc";
             }
         }
-
 
     </script>
 
